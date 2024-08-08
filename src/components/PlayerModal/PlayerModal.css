@@ -1,0 +1,93 @@
+/* Define variables */
+:root {
+  --bars-number: 40;
+  --bar-color: #1db954;
+  --light-bar-color: #2e2e2e;
+}
+
+.modal-content {
+  background-color: #2e2e2e;
+  color: #fff;
+  border: 4px solid #1db954;
+}
+
+.animate-bars {
+  display: flex;
+  align-items: center;
+  width: 50%;
+  height: 40px;
+  overflow: hidden;
+  margin: 0 auto;
+
+  background-color: var(--light-bar-color);
+}
+
+.animate-bars div {
+  flex: 1 0 auto;
+  height: 100%;
+  margin: 0 1px;
+  background-color: var(--bar-color);
+  animation: animate-bar 1s linear infinite alternate;
+  transform-origin: bottom;
+  opacity: 0;
+}
+
+.animate-bars-center div {
+  transform-origin: center;
+}
+
+@keyframes animate-bar {
+  0% {
+    transform: scaleY(0);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 0.4;
+  }
+}
+
+.animate-bars div:nth-child(odd) {
+  animation-duration: 1s;
+  animation-delay: 0.5s;
+}
+.animate-bars div:nth-child(even) {
+  animation-duration: 0.5s;
+  animation-delay: 0s;
+}
+
+audio {
+  width: 100%;
+  outline: none;
+  border: none;
+  background-color: #2e2e2e;
+  color: #fff;
+}
+
+audio::-webkit-media-controls-play-button,
+audio::-webkit-media-controls-start-playback-button,
+audio::-webkit-media-controls-pause-button,
+audio::-webkit-media-controls-toggle-closed-captions-button,
+audio::-webkit-media-controls-fullscreen-button {
+  color: #1db954;
+}
+
+audio::-webkit-media-controls-panel {
+  background-color: #2e2e2e;
+  color: #1db954;
+}
+
+audio::-webkit-media-controls-current-time-display,
+audio::-webkit-media-controls-time-remaining-display {
+  color: #1db954;
+}
+
+audio::-webkit-media-controls-timeline {
+  background-color: #2e2e2e;
+}
+
+audio::-webkit-media-controls-timeline,
+audio::-webkit-media-controls-seek-back-button,
+audio::-webkit-media-controls-seek-forward-button {
+  color: #1db954;
+}
