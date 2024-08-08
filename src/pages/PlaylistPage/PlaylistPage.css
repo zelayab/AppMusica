@@ -1,0 +1,44 @@
+.playlists-page {
+  padding: 1rem;
+}
+
+.playlists-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.playlists-container .item-card {
+  flex: 1 1 21%;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.item-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.item-card:hover .item-card-buttons {
+  opacity: 1;
+  visibility: visible;
+}
+
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.pagination-controls button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .playlists-container .item-card {
+    flex: 1 1 45%;
+  }
+}
