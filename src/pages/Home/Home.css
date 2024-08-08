@@ -1,0 +1,98 @@
+.main-container {
+  padding: 20px;
+}
+
+.welcome-banner {
+  position: relative;
+  background-image: url("https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg?auto=compress&cs=tinysrgb&w=600");
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 40px 20px;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.welcome-banner .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.welcome-banner .content {
+  position: relative;
+  z-index: 2;
+}
+
+.welcome-banner h1,
+.welcome-banner h2 {
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.welcome-banner p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.banner {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.banner h2 {
+  color: #1db954;
+  margin-bottom: 10px;
+}
+
+.banner p {
+  font-size: 14px;
+  color: #b3b3b3;
+}
+
+.banner .btn {
+  background-color: #1db954;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease;
+}
+
+.banner .btn:hover {
+  background-color: #1ed760;
+}
+
+.section-title {
+  color: #ffffff;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.list .card {
+  padding: 20px;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: clamp(280px, 40vw, 45%);
+  height: clamp(340px, 70vh, 90%);
+  transition: transform 0.3s ease;
+  backdrop-filter: blur(10px);
+}

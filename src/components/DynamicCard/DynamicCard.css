@@ -1,0 +1,62 @@
+.dynamic-card {
+  margin-bottom: 20px;
+  transition: transform 0.3s ease;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: #121212;
+  color: #ffffff;
+  padding: 20px;
+  max-width: 300px;
+  margin: 20px auto;
+  border: 1px solid #666;
+}
+
+.dynamic-card:hover {
+  transform: scale(1.05);
+}
+.rounded-artist {
+  border-radius: 50% !important;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  display: block;
+}
+
+.dynamic-card img {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.dynamic-card .card-body {
+  text-align: left;
+  padding: 20px;
+}
+
+.dynamic-card .card-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.dynamic-card .card-text {
+  font-size: 14px;
+  color: #b3b3b3;
+  margin: 5px 0;
+}
+
+.dynamic-card .btn-primary {
+  background-color: #1db954;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+.dynamic-card .btn-primary:hover {
+  background-color: #1ed760;
+}

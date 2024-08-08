@@ -1,35 +1,62 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// App.tsx
+import React from "react";
+import { Route, Routes } from "react-router-dom";
 
-function App() {
-  const [count, setCount] = useState(0)
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "./App.css";
+import Navigation from "./components/Navigation/Navigation";
+import ProtectedRoute from "./components/ProtectedRoute/protectedRoute";
+import { AuthProvider } from "./context/AuthContext";
+import ArtistPage from "./pages/ArtistPage/ArtistPage";
+import ArtistsList from "./pages/ArtistsList/ArtistsList";
+import Home from "./pages/Home/Home";
+import Login from "./pages/Login/Login";
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
+import PlaylistPage from "./pages/PlaylistPage/PlaylistPage";
+import Profile from "./pages/Profile/Profile";
+import SongTable from "./pages/SongTable/SongTable";
 
+const App: React.FC = () => {
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <AuthProvider>
+      <div className="App">
+        <Navigation />
+        <div className="RoutesWrapper">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
 
-export default App
+            <Route path="/artists/:id" element={<ArtistPage />} />
+            <Route path="/playlists/:id" element={<PlaylistPage />} />
+            {/* <Route path="/playlist/:id" element={<PlaylistSongs />} />  */}
+
+            {/*  {/* PROTECTED */}
+            <Route
+              path="/artists"
+              element={<ProtectedRoute element={<ArtistsList />} />}
+            />
+            <Route
+              path="/profile"
+              element={<ProtectedRoute element={<Profile />} />}
+            />
+
+            <Route
+              path="/songs"
+              element={<ProtectedRoute element={<SongTable />} />}
+            />
+
+            <Route
+              path="/playlists"
+              element={<ProtectedRoute element={<PlaylistPage />} />}
+            />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+          <ToastContainer />
+        </div>
+      </div>
+    </AuthProvider>
+  );
+};
+
+export default App;

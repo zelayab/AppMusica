@@ -1,0 +1,33 @@
+.item-card {
+  margin: 20px;
+  background-color: #2e2e2e;
+  color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+.item-card-image {
+  margin: 10px;
+  height: 200px;
+  object-fit: none;
+}
+
+.item-card .icon {
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.item-card .icon:hover {
+  color: #1db954;
+}
+
+.item-card img {
+  border-radius: 8px 8px 0 0;
+}
+
+.item-card-actions {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  gap: 10px;
+}
