@@ -1,0 +1,76 @@
+.table-songs {
+  background-color: #1e1e1e;
+  color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table-songs .table {
+  width: 100%;
+  color: #fff;
+  border-collapse: separate;
+  border-spacing: 0 15px;
+}
+
+.table-songs .table th,
+.table-songs .table td {
+  padding: 12px 15px;
+  background-color: #666;
+  border: none;
+  transition: background-color 0.3s ease;
+  color: #fff;
+}
+
+.table-songs .table th {
+  background-color: #333;
+}
+
+.table-songs .table tbody tr:hover td {
+  background-color: #444;
+}
+
+.table-songs .table td:first-child {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.table-songs .table td:last-child {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  gap: 10px;
+}
+
+.table-songs .modal-content {
+  background-color: #2e2e2e;
+  color: #fff;
+}
+
+.table-songs .modal-header,
+.table-songs .modal-footer {
+  border-color: #444;
+}
+
+.table-songs .modal-header .modal-title {
+  color: #1db954;
+}
+
+.icon {
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.icon:hover {
+  transform: scale(1.1);
+  color: #1db954;
+}
+
+.form-control {
+  border: none;
+  border-radius: 8px;
+}
+
+.form-control:focus {
+  border-color: #1db954;
+  box-shadow: none;
+}
