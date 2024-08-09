@@ -48,17 +48,14 @@ export const patchAlbum = (id: number, data: any) =>
 
 // **SONGS**
 
-// Función para obtener todas las canciones manejando la paginación
+// Función para obtener todas las canciones manejando la paginaciónexport const getSongs = async () => {
 export const getSongs = async () => {
   let allSongs: Song[] = [];
-
   let nextPage: string | null = "harmonyhub/songs/";
 
   while (nextPage) {
     try {
-      const response: {
-        data: { next: string | null; results: Song[] };
-      } = await api.get(nextPage);
+      const response = await api.get(nextPage);
       const { next, results } = response.data;
 
       console.log("Results:", results);
@@ -67,15 +64,20 @@ export const getSongs = async () => {
       allSongs = [...allSongs, ...results];
 
       if (next) {
-        const url = new URL(next, api.defaults.baseURL);
-        url.protocol = "https:";
-        nextPage = url.toString();
-        console.log("Fixed URL:", nextPage);
+        try {
+          const url: URL = new URL(next, api.defaults.baseURL);
+          url.protocol = "https:"; // Asegúrate de que sea HTTPS
+          nextPage = url.pathname + url.search; // Asegúrate de que nextPage sea relativo
+          console.log("Fixed URL:", nextPage);
+        } catch (error) {
+          console.error("Error construyendo la URL de paginación:", error);
+          nextPage = null;
+        }
       } else {
-        nextPage = null;
+        nextPage = null; // No hay más páginas
       }
     } catch (error) {
-      console.error("Error fetching data from:", nextPage, error);
+      console.error("Error fetching data:", error);
       nextPage = null; // Detener la paginación en caso de error
     }
   }
