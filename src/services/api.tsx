@@ -43,13 +43,35 @@ export const getLastAddedSong = async (): Promise<Song | null> => {
 
 // **ALBUMS**
 export const albums = () => api.get("harmonyhub/albums");
-export const createAlbum = (data: any) => api.post("harmonyhub/albums", data);
-export const updateAlbum = (id: number, data: any) =>
-  api.put(`harmonyhub/albums/${id}`, data);
+export const createAlbum = (data: {
+  name: string;
+  artist: number;
+  genre: number;
+  release_date: string;
+  cover: string;
+}) => api.post("harmonyhub/albums", data);
+export const updateAlbum = (
+  id: number,
+  data: {
+    name: string;
+    artist: number;
+    genre: number;
+    release_date: string;
+    cover: string;
+  }
+) => api.put(`harmonyhub/albums/${id}`, data);
 export const deleteAlbum = (id: number) =>
   api.delete(`harmonyhub/albums/${id}`);
-export const patchAlbum = (id: number, data: any) =>
-  api.patch(`harmonyhub/albums/${id}`, data);
+export const patchAlbum = (
+  id: number,
+  data: {
+    name: string;
+    artist: number;
+    genre: number;
+    release_date: string;
+    cover: string;
+  }
+) => api.patch(`harmonyhub/albums/${id}`, data);
 
 // **SONGS**
 
