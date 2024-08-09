@@ -12,7 +12,6 @@ import ArtistPage from "./pages/ArtistPage/ArtistPage";
 import ArtistsList from "./pages/ArtistsList/ArtistsList";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
-import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import PlaylistPage from "./pages/PlaylistPage/PlaylistPage";
 import Profile from "./pages/Profile/Profile";
 import SongTable from "./pages/SongTable/SongTable";
@@ -50,7 +49,6 @@ const App: React.FC = () => {
               path="/playlists"
               element={<ProtectedRoute element={<PlaylistPage />} />}
             />
-            <Route path="*" element={<NotFoundPage />} />
           </Routes>
           <ToastContainer />
         </div>
