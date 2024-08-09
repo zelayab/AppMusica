@@ -31,9 +31,14 @@ api.interceptors.request.use(
 );
 
 // Función para obtener la última canción agregada
-export const getLastAddedSong = async () => {
-  const songs = await getSongs();
-  return songs[songs.length - 1];
+export const getLastAddedSong = async (): Promise<Song | null> => {
+  try {
+    const songs = await getSongs();
+    return songs.length > 0 ? songs[songs.length - 1] : null;
+  } catch (error) {
+    console.error("Error fetching last song:", error);
+    return null;
+  }
 };
 
 // **ALBUMS**

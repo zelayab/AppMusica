@@ -11,12 +11,15 @@ const Home = () => {
   const { state } = useAuth();
   const { token } = state;
   const loading = useSimulatedLoading();
-  const [lastSong, setLastSong] = useState(null);
+  const [lastSong, setLastSong] = useState(
+    JSON.parse(localStorage.getItem("lastSong") || "{}")
+  );
 
   useEffect(() => {
     if (token) {
       getLastAddedSong()
         .then((response) => {
+          console.log("Last song:", response);
           setLastSong(response);
         })
         .catch((error) => {
