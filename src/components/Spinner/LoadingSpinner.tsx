@@ -5,8 +5,8 @@ const LoadingSpinner = () => {
   return (
     <div className="loading-spinner-overlay">
       <div className="spinner-container">
-        <Spinner animation="border" variant="primary" />
-        <span className="sr-only">Cargando...</span>
+        <span className="sr-only mr-3">Cargando </span>
+        <Spinner animation="border" variant="success" />
       </div>
     </div>
   );

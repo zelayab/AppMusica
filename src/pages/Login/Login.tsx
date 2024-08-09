@@ -1,36 +1,16 @@
 import React, { useState } from "react";
-import {
-  Button,
-  Col,
-  Container,
-  Form,
-  Row,
-  Toast,
-  ToastContainer,
-} from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useAuth } from "../../context/AuthContext";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
   const { login } = useAuth();
-  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-      await login(username, password);
-      navigate("/");
-    } catch (error: any) {
-      console.error("Error al iniciar sesión:", error);
-      if (error.response?.status === 401) {
-        setError("Usuario o contraseña incorrectos. Inténtalo de nuevo.");
-      } else {
-        setError("Error al iniciar sesión. Por favor, intenta más tarde.");
-      }
-    }
+
+    await login(username, password);
   };
 
   return (
@@ -63,23 +43,6 @@ const Login = () => {
               Iniciar sesión
             </Button>
           </Form>
-          {error && (
-            <ToastContainer position="bottom-end" className="p-3">
-              <Toast
-                show={!!error}
-                onClose={() => setError("")}
-                delay={5000}
-                autohide
-              >
-                <Toast.Header closeButton={false}>
-                  <strong className="mr-auto">Error</strong>
-                </Toast.Header>
-                <Toast.Body className="text-white bg-danger">
-                  {error}
-                </Toast.Body>
-              </Toast>
-            </ToastContainer>
-          )}
         </Col>
       </Row>
     </Container>

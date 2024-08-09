@@ -1,10 +1,11 @@
 import React, { createContext, useContext, useEffect, useReducer } from "react";
 import { useNavigate } from "react-router-dom";
-import LoadingSpinner from "../components/Spinner/LoadingSpinner";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useSimulatedLoading } from "../hooks/useSimulatedLoading";
 
 interface AuthState {
-  token: string | null;
+  token: string | null | undefined;
   loading: boolean;
 }
 
@@ -31,9 +32,10 @@ const authReducer = (
   action: { type: string; payload?: string }
 ): AuthState => {
   switch (action.type) {
-    case ACTIONS.LOGIN:
-      const token = action.payload ? action.payload : null;
+    case ACTIONS.LOGIN: {
+      const token = action.payload;
       return { ...state, token, loading: false };
+    }
     case ACTIONS.LOGOUT:
       return { ...state, token: null, loading: false };
     case ACTIONS.SET_LOADING:
@@ -66,15 +68,25 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
           body: JSON.stringify({ username, password }),
         }
       );
+
+      if (!response.ok) {
+        throw new Error("Error en la solicitud: " + response.status);
+      }
+
       const data = await response.json();
+
       if (data.token) {
         localStorage.setItem("token", data.token);
         dispatch({ type: ACTIONS.LOGIN, payload: data.token });
+        console.log("Login successful, navigating...");
+        navigate("/"); // Solo navega si el login es exitoso
       } else {
-        dispatch({ type: ACTIONS.LOGOUT });
+        throw new Error("Token no recibido");
       }
-    } catch (error) {
+    } catch (error: Error | unknown) {
       dispatch({ type: ACTIONS.LOGOUT });
+      console.error("Error en login:", error);
+      toast.error("Error al iniciar sesión,  usuario o contraseña incorrectos");
     }
   };
 
@@ -83,7 +95,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const logout = () => {
     dispatch({ type: ACTIONS.LOGOUT });
     localStorage.removeItem("token");
-
+    toast.success("Sesión cerrada exitosamente");
     navigate("/");
   };
 
@@ -98,7 +110,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   return (
     <AuthContext.Provider value={{ state, login, logout }}>
-      {state.loading ? <LoadingSpinner /> : children}
+      {children}
     </AuthContext.Provider>
   );
 };

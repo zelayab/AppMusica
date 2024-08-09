@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Playlist, PlaylistResponse } from "../types/playlist";
+import { Song } from "../types/song";
 import { Pagination } from "../types/utils";
 
 // Crear instancia de Axios
@@ -49,27 +50,33 @@ export const patchAlbum = (id: number, data: any) =>
 
 // Función para obtener todas las canciones manejando la paginación
 export const getSongs = async () => {
-  let allSongs: any[] = [];
+  let allSongs: Song[] = [];
+
   let nextPage: string | null = "harmonyhub/songs/";
 
   while (nextPage) {
-    const response = await api.get(nextPage);
-    const { next, results } = response.data;
+    try {
+      const response: {
+        data: { next: string | null; results: Song[] };
+      } = await api.get(nextPage);
+      const { next, results } = response.data;
 
-    allSongs = [...allSongs, ...results];
+      console.log("Results:", results);
+      console.log("Next URL:", next);
 
-    if (next) {
-      try {
-        // Construir una nueva URL con HTTPS
-        const url: any = new URL(next, api.defaults.baseURL);
+      allSongs = [...allSongs, ...results];
+
+      if (next) {
+        const url = new URL(next, api.defaults.baseURL);
         url.protocol = "https:";
         nextPage = url.toString();
-      } catch (error) {
-        console.error("Error construyendo la URL de paginación:", error);
+        console.log("Fixed URL:", nextPage);
+      } else {
         nextPage = null;
       }
-    } else {
-      nextPage = null; // No hay más páginas
+    } catch (error) {
+      console.error("Error fetching data from:", nextPage, error);
+      nextPage = null; // Detener la paginación en caso de error
     }
   }
 
