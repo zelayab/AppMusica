@@ -10,6 +10,7 @@ interface ItemCardProps {
   onDelete: () => void;
   imageUrl?: string;
   website?: string;
+  extraButton?: React.ReactNode;
 }
 
 const ItemCard: React.FC<ItemCardProps> = ({
@@ -19,6 +20,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
   onDelete,
   imageUrl,
   website,
+  extraButton,
 }) => {
   return (
     <Card className="item-card">
@@ -43,6 +45,9 @@ const ItemCard: React.FC<ItemCardProps> = ({
             <IconTrash className="icon" />
           </Button>
         </div>
+        {extraButton && (
+          <div className="item-card-extra-button">{extraButton}</div>
+        )}
       </Card.Body>
     </Card>
   );

@@ -143,6 +143,8 @@ export const deleteSong = (id: number) => api.delete(`harmonyhub/songs/${id}`);
 export const patchSong = (id: number, data: any) =>
   api.patch(`harmonyhub/songs/${id}`, data);
 
+export const getSong = (id: number) => api.get(`harmonyhub/songs/${id}`);
+
 // **ARTISTS**
 // Función para obtener todos los artistas manejando la paginación
 export const getArtists = async (page: number, pageSize: number) => {
@@ -302,3 +304,25 @@ export const deletePlaylist = (id: number) =>
   api.delete(`harmonyhub/playlists/${id}`);
 export const patchPlaylist = (id: number, data: any) =>
   api.patch(`harmonyhub/playlists/${id}`, data);
+
+export const getPlaylistSongs = async (playlistId: number) => {
+  try {
+    // 1. Obtenemos la playlist y sus entries
+    const playlistResponse = await getPlaylist(playlistId);
+    console.log("Playlist response:", playlistResponse.data);
+
+    const playlistEntries = playlistResponse.data.entries;
+    console.log("Playlist entries:", playlistEntries);
+    //como solamente trae los numeros, que es el id de la cancion, hay que traer los detalles de la cancion
+
+    // 2. Obtenemos los detalles de las canciones con el GetSong
+    const playlistSongs = await Promise.all(
+      playlistEntries.map((entry: number) => getSong(entry))
+    );
+
+    return playlistSongs;
+  } catch (error) {
+    console.error("Error fetching playlist songs with details:", error);
+    throw error;
+  }
+};

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import ItemCard from "../../components/ItemCard/ItemCard";
 import {
@@ -25,6 +26,8 @@ const PlaylistsPage: React.FC = () => {
   const [editingPlaylist, setEditingPlaylist] = useState<Playlist | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredPlaylists, setFilteredPlaylists] = useState<Playlist[]>([]);
+
+  const navigate = useNavigate();
 
   const fetchAllPlaylists = async () => {
     try {
@@ -165,6 +168,13 @@ const PlaylistsPage: React.FC = () => {
     setSearchTerm(e.target.value);
   };
 
+  const handleViewSongs = (playlistId: number) => {
+    navigate(`/playlists/${playlistId}/entries`);
+    if (playlists) {
+      console.log("playlists", playlists);
+    }
+  };
+
   return (
     <div className="playlists-page">
       <h2>Playlists</h2>
@@ -189,6 +199,14 @@ const PlaylistsPage: React.FC = () => {
               description={playlist.description}
               onEdit={() => handleShowEditModal(playlist)}
               onDelete={() => handleDelete(playlist.id)}
+              extraButton={
+                <Button
+                  variant="info"
+                  onClick={() => handleViewSongs(playlist.id)}
+                >
+                  Ver canciones
+                </Button>
+              }
             />
           ))
         ) : (
@@ -239,6 +257,7 @@ const PlaylistsPage: React.FC = () => {
           <Button variant="secondary" onClick={() => setShowModal(false)}>
             Cancelar
           </Button>
+
           <Button
             variant="primary"
             onClick={

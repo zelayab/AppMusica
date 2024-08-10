@@ -13,6 +13,7 @@ import ArtistsList from "./pages/ArtistsList/ArtistsList";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
+import PlaylistEntries from "./pages/PlaylistEntries/PlaylistEntries";
 import PlaylistPage from "./pages/PlaylistPage/PlaylistPage";
 import Profile from "./pages/Profile/Profile";
 import SongTable from "./pages/SongTable/SongTable";
@@ -49,6 +50,11 @@ const App: React.FC = () => {
             <Route
               path="/playlists"
               element={<ProtectedRoute element={<PlaylistPage />} />}
+            />
+
+            <Route
+              path="/playlists/:playlistId/entries"
+              element={<PlaylistEntries />}
             />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
