@@ -33,10 +33,20 @@ const ArtistPage: React.FC = () => {
 
   const handleSave = async () => {
     if (artist) {
+      let updatedWebsite = website;
+
+      if (
+        updatedWebsite &&
+        !updatedWebsite.startsWith("http://") &&
+        !updatedWebsite.startsWith("https://")
+      ) {
+        updatedWebsite = `https://${updatedWebsite}`;
+      }
+
       const updatedArtist = {
         name,
         bio,
-        website,
+        website: updatedWebsite,
       };
 
       try {
@@ -44,6 +54,7 @@ const ArtistPage: React.FC = () => {
         const response = await getArtist(artist.id);
         setArtist(response.data);
         handleCloseEditModal();
+        toast.success("Artista actualizado correctamente");
       } catch (error) {
         console.error("Error al actualizar el artista:", error);
       }

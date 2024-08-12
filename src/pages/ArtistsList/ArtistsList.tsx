@@ -42,11 +42,21 @@ const ArtistsList = () => {
   };
 
   const handleCreateArtist = async () => {
+    if (
+      newArtistData.website &&
+      !newArtistData.website.startsWith("http://") &&
+      !newArtistData.website.startsWith("https://")
+    ) {
+      setNewArtistData({
+        ...newArtistData,
+        website: `https://${newArtistData.website}`,
+      });
+    }
+
     try {
       const data = await createArtist(newArtistData);
       console.log("Respuesta de la API:", data);
 
-      // Re-fetch de los artistas
       setCurrentPage(1);
       await fetchArtists();
 
@@ -131,7 +141,7 @@ const ArtistsList = () => {
                     Página web
                   </label>
                   <input
-                    type="url"
+                    type="text"
                     className="form-control"
                     id="website"
                     name="website"

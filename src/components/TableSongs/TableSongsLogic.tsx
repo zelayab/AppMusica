@@ -46,10 +46,10 @@ export const useSongsLogic = () => {
       if (Array.isArray(response)) {
         setCurrentSongs(response);
       } else {
-        console.error("La respuesta de la API no es un array:", response);
+        toast.error("No se pudo cargar la lista de canciones");
       }
     } catch (error) {
-      console.error("Error fetching songs:", error);
+      toast.error("Error al cargar la lista de canciones");
     }
   };
 

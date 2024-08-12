@@ -34,10 +34,8 @@ const PlaylistEntries: React.FC = () => {
         const playlistSongs = await getPlaylistSongs(
           parseInt(playlistId || "")
         );
-        console.log("playlistSongs:", playlistSongs);
         setSongs(playlistSongs);
       } catch (error) {
-        console.error("Error al obtener canciones de la playlist:", error);
         toast.error("Error al obtener canciones de la playlist.");
       }
     };

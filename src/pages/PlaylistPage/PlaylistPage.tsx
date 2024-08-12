@@ -50,7 +50,6 @@ const PlaylistsPage: React.FC = () => {
       setPlaylists(allPlaylists);
       setFilteredPlaylists(allPlaylists);
     } catch (error) {
-      console.error("Error al obtener playlists:", error);
       toast.error("Error al obtener playlists.");
     }
   };
@@ -75,20 +74,17 @@ const PlaylistsPage: React.FC = () => {
   const handleCreate = async () => {
     try {
       const response = await createPlaylist(newPlaylist);
-      console.log("API Response:", response);
 
       if (response && response.name) {
         toast.success("Playlist creada con éxito!");
         fetchAllPlaylists();
       } else {
-        console.error("La respuesta no contiene una playlist válida.");
         toast.error("Error en la respuesta al crear la playlist.");
       }
 
       setShowModal(false);
       setNewPlaylist({ name: "", description: "" });
     } catch (error) {
-      console.error("Error al crear playlist:", error);
       toast.error("Error al crear playlist.");
     }
   };
@@ -133,7 +129,6 @@ const PlaylistsPage: React.FC = () => {
       setNewPlaylist({ name: "", description: "" });
       toast.success("Playlist actualizada con éxito!");
     } catch (error) {
-      console.error("Error al actualizar playlist:", error);
       toast.error("Error al actualizar playlist.");
     }
   };
